@@ -1,7 +1,7 @@
 An OAuth Login Page for Titanium
 ===
 
-Almost any app on the store propose a customized experience by allowing the user to "login". If the login screen is really easy to design with Titanium, implementing the security protocol (**OAuth**) beneath could be quite challenging.
+Almost any app on the store proposes a customized experience by allowing the user to "login". If the login screen is really easy to design with Titanium, implementing the security protocol (**OAuth**) beneath could be quite challenging.
 
 Hopefully, since Appcelerator is now part of Axway, we can use the *Axway API Gateway* to implement the **OAuth** protocol and just use it in Titanium. Here is how to do it...
 
@@ -14,12 +14,10 @@ Let's say we have an existing application that will receive our new login featur
 
 We could want to implement:
  - User Authentication at app launch or on user action (a "login" button for instance)
- - A sole authentication method : login and password [^footnote]
+ - A sole authentication method : login and password
  - Never store the user password locally (it is **NOT** secure !)
  - Renew the session when expired
  - Keep state between launch (if the user is logged in, he can close the app, re-open it and will still be logged in)
-
-  [^footnote]: although we could support different authentication mechanisms, both in Titanium and Axway API Gateway, it is completely out-of-scope of this blog post
 
 Everything you need to know about OAuth!
 ---
@@ -113,7 +111,9 @@ The "auth" model has the following API:
 ##### `login(username, password)`: go through the OAuth sequence
  - Emit the `loginSucceeded` event if the OAuth sequence is successful
  - Emit the `loginFailed` event if the OAuth sequence fails
+
 ##### `logout()`: destroy locally the OAuth tokens
+
 ##### `validateAuth()`: validate the session server-side and renew the access_token if required
  - Emit the `loggedIn` event if the session is valid
  - Emit the `loginNeeded` event if the sessions is not valid anymore (the access_token could not be renewed)
@@ -201,7 +201,8 @@ xhr.send();
 Renewing access_token upon expiration during an XHR
 ---
 
-When the access_token expires, the server returns an HTTP 401 status
+When the access_token expires, the server returns an HTTP 401 status.
+
 It has to be handled by calling the `validateAuth` method of the model.
  - Upon `loggedIn` event, get the new access token (‘get’ method on the model) and re-run the XHR
  - Upon `loginNeeded` event, redirect the user to the login page (refresh_token expired)
@@ -315,4 +316,4 @@ The sample app is available for download on GitHub so that you start playing wit
 
 You can download the app template [here](https://github.com/nmasse-itix/Appcelerator-Code/blob/master/OAuth-Login-Page/OAuthEnabledApp.tgz?raw=true).
 
-Code Strong! 
+Code Strong!
