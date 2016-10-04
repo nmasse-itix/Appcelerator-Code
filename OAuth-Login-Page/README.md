@@ -64,7 +64,7 @@ Host: server.example.com
 Authorization: Bearer 2YotnFZFEjr1zCsicMWpAA
 ```
 
-Eventually, when the `access_token` expires, the Resource Server replies with a 401. In that case, you can renew the `access_token` by providing the `refresh_token` to the
+Eventually, when the `access_token` expires, the Resource Server replies with a 401. In that case, you can renew the `access_token` by providing the `refresh_token` to the token endpoint. 
 
 
 ```http
